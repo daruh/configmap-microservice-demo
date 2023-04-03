@@ -12,7 +12,9 @@ import (
 )
 
 const CONFIG_FILE = "/etc/config/configmap-microservice-demo.yaml"
-const BIND = "0.0.0.0:8080"
+
+// const CONFIG_FILE = "configmap-microservice-demo.yaml"
+const BIND = "0.0.0.0:8084"
 
 func check(err error) {
 	if err != nil {
@@ -21,14 +23,14 @@ func check(err error) {
 }
 
 /*
- This is the struct that holds our application's configuration
+This is the struct that holds our application's configuration
 */
 type Config struct {
 	Message string `yaml:"message"`
 }
 
 /*
- Simple Yaml Config file loader
+Simple Yaml Config file loader
 */
 func loadConfig(configFile string) *Config {
 	conf := &Config{}
@@ -37,6 +39,7 @@ func loadConfig(configFile string) *Config {
 
 	err = yaml.Unmarshal(configData, conf)
 	check(err)
+	log.Println(conf)
 	return conf
 }
 
